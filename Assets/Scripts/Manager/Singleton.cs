@@ -16,9 +16,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        Init();
     }
+
+    private void Start() { Init(); }
 
     protected virtual void Init() { }
 
