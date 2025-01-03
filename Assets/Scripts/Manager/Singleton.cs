@@ -20,7 +20,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         Init();
     }
 
-    protected virtual void Init() { Debug.Log($"Singleton Init : {this.name}"); }
+    protected virtual void Init() { }
 
     public static void CreateInstance()
     {
