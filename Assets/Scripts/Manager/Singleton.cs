@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    static T instance;
-    public static T Instance { get { return instance; } }
+    static T _instance;
+    public static T Instance { get { return _instance; } }
 
     private void Awake()
     {
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this as T;
+            _instance = this as T;
             DontDestroyOnLoad(this.gameObject);
         }
         else
@@ -25,15 +25,15 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     public static void CreateInstance()
     {
         GameObject obj = new GameObject(typeof(T).Name, typeof(T));
-        instance = Util.GetOrAddComponent<T>(obj);
+        _instance = Util.GetOrAddComponent<T>(obj);
     }
 
     public static void ReleaseInstance()
     {
-        if (instance == null)
+        if (_instance == null)
             return;
 
-        Destroy(instance.gameObject);
-        instance = null;
+        Destroy(_instance.gameObject);
+        _instance = null;
     }
 }

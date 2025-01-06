@@ -4,22 +4,25 @@ using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 public class SceneManager : Singleton<SceneManager>
 {
-    Scene_Base curScene;
+    Scene_Base _curScene;
 
     protected override void Init()
     {
         base.Init();
 
         // 처음으로 시작하는 씬 로딩
+        if (GetCurScene() == null)
+            return;
+
         StartCoroutine(GetCurScene().LoadingRoutine());
     }
 
     public Scene_Base GetCurScene()
     {
-        if (curScene == null)
-            curScene = FindAnyObjectByType<Scene_Base>();
+        if (_curScene == null)
+            _curScene = FindAnyObjectByType<Scene_Base>();
 
-        return curScene;
+        return _curScene;
     }
     public T GetCurScene<T>() where T : Scene_Base
     {
@@ -34,6 +37,7 @@ public class SceneManager : Singleton<SceneManager>
     IEnumerator LoadingRoutine(string sceneName)
     {
         // 씬이 변경되기 전 정리할 작업
+        Manager.UI.ClearPopup();
 
         AsyncOperation oper = UnitySceneManager.LoadSceneAsync(sceneName);
 
@@ -44,6 +48,7 @@ public class SceneManager : Singleton<SceneManager>
         }
 
         // 씬 로딩 작업
+        Manager.UI.EnsureEventSystem();
         yield return GetCurScene().LoadingRoutine();
     }
 }
