@@ -25,7 +25,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     public static void CreateInstance()
     {
         GameObject obj = new GameObject(typeof(T).Name, typeof(T));
-        _instance = Util.GetOrAddComponent<T>(obj);
+        _instance = obj.GetOrAddComponent<T>();
     }
 
     public static void ReleaseInstance()

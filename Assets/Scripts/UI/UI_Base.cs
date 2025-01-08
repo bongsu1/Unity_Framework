@@ -54,7 +54,7 @@ public class UI_Base : MonoBehaviour
 
     public static void BindEvent(GameObject obj, Action action, EvtType type = EvtType.Click)
     {
-        UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(obj);
+        UI_EventHandler evt = obj.GetOrAddComponent<UI_EventHandler>();
 
         switch (type)
         {

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class SoundManager : Singleton<SoundManager>
 {
@@ -24,7 +23,7 @@ public class SoundManager : Singleton<SoundManager>
         for (int i = 0; i < soundTypeNames.Length; i++)
         {
             GameObject obj = new GameObject { name = soundTypeNames[i] };
-            _audioSources[i] = Util.GetOrAddComponent<AudioSource>(obj);
+            _audioSources[i] = obj.GetOrAddComponent<AudioSource>();
             obj.transform.SetParent(transform);
         }
 

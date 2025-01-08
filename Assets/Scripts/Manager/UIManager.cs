@@ -24,7 +24,7 @@ public class UIManager : Singleton<UIManager>
 
     public void SetCanvas(GameObject obj, bool sort = true)
     {
-        Canvas canvas = Util.GetOrAddComponent<Canvas>(obj);
+        Canvas canvas = obj.GetOrAddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.overrideSorting = true;
 
@@ -47,7 +47,7 @@ public class UIManager : Singleton<UIManager>
         }
 
         GameObject obj = Manager.Resource.Instantiate(path);
-        T popup = Util.GetOrAddComponent<T>(obj);
+        T popup = obj.GetOrAddComponent<T>();
         _popupStack.Push(popup);
 
         if (parent == null)
