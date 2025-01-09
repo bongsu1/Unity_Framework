@@ -6,9 +6,9 @@ public class SceneManager : Singleton<SceneManager>
 {
     Scene_Base _curScene;
 
-    protected override void Init()
+    protected override void InitFromStart()
     {
-        base.Init();
+        base.InitFromStart();
 
         // 처음으로 시작하는 씬 로딩
         if (GetCurScene() == null)
@@ -37,6 +37,8 @@ public class SceneManager : Singleton<SceneManager>
     IEnumerator LoadingRoutine(string sceneName)
     {
         // 씬이 변경되기 전 정리할 작업
+        Manager.Pool.ClearPool();
+        Manager.Sound.Stop(SoundType.SFX);
         Manager.UI.ClearPopup();
 
         AsyncOperation oper = UnitySceneManager.LoadSceneAsync(sceneName);

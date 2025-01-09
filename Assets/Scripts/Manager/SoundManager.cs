@@ -14,9 +14,9 @@ public class SoundManager : Singleton<SoundManager>
         set { _audioSources[(int)type].volume = value; }
     }
 
-    protected override void Init()
+    protected override void InitFromAwake()
     {
-        base.Init();
+        base.InitFromAwake();
 
         string[] soundTypeNames = Enum.GetNames(typeof(SoundType));
         _audioSources = new AudioSource[soundTypeNames.Length];
@@ -50,7 +50,7 @@ public class SoundManager : Singleton<SoundManager>
                 audioSource.clip = clip;
                 audioSource.Play();
                 break;
-            case SoundType.Effect:
+            case SoundType.SFX:
                 audioSource.PlayOneShot(clip);
                 break;
             default:
@@ -81,4 +81,4 @@ public class SoundManager : Singleton<SoundManager>
     }
 }
 
-public enum SoundType { BGM, Effect, }
+public enum SoundType { BGM, SFX, }

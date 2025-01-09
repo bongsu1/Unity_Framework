@@ -16,11 +16,14 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        InitFromAwake();
     }
 
-    private void Start() { Init(); }
+    private void Start() { InitFromStart(); }
 
-    protected virtual void Init() { }
+    protected virtual void InitFromAwake() { }
+    protected virtual void InitFromStart() { }
 
     public static void CreateInstance()
     {

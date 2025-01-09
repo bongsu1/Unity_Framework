@@ -4,12 +4,12 @@ using UnityEngine.EventSystems;
 
 public class UIManager : Singleton<UIManager>
 {
-    int _order = -20;
+    int _order = 20;
     Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
 
-    protected override void Init()
+    protected override void InitFromStart()
     {
-        base.Init();
+        base.InitFromStart();
 
         EnsureEventSystem();
     }
