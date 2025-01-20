@@ -36,6 +36,10 @@ public class SoundManager : Singleton<SoundManager>
             return;
 
         AudioClip clip = Manager.Resource.Load<AudioClip>(path);
+        Play(type, clip);
+    }
+    public void Play(SoundType type, AudioClip clip)
+    {
         if (clip == null)
             return;
 
